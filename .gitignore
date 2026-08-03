@@ -1,0 +1,8 @@
+build/
+.cache/
+renders/
+**/.DS_Store
+src/external/WGPU/**/x86_64/debug
+src/external/WGPU/**/aarch64/debug
+src/external/WGPU/windows/x86_64/gnu_debug
+src/external/WGPU/windows/x86_64/msvc_debug
