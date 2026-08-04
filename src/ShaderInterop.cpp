@@ -3,6 +3,7 @@
 #include "headers/Hittable.hpp"
 #include "headers/RenderJob.hpp"
 #include "headers/Vector3.hpp"
+#include <algorithm>
 #include <cassert>
 #include <cstddef>
 #include <cstdint>
@@ -52,7 +53,8 @@ ShaderInterop::AABB::AABB(const ::AABB &box) noexcept {
          static_cast<float>(box.AxisInterval(2).Max())};
 }
 
-ShaderInterop::AABB::AABB(const ShaderInterop::AABB &a, const ShaderInterop::AABB &b) noexcept {
+ShaderInterop::AABB::AABB(const ShaderInterop::AABB &a,
+                          const ShaderInterop::AABB &b) noexcept {
   min = {std::min(a.min.x, b.min.x), std::min(a.min.y, b.min.y),
          std::min(a.min.z, b.min.z)};
 

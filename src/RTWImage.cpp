@@ -4,6 +4,7 @@
 #include "stb_image.h"
 #include <algorithm>
 #include <cstddef>
+#include <cstdint>
 #include <cstdlib>
 #include <expected>
 #include <format>

@@ -7,6 +7,7 @@
 #include "headers/Texture.hpp"
 #include "headers/Vector3.hpp"
 #include <algorithm>
+#include <cmath>
 #include <memory>
 #include <optional>
 

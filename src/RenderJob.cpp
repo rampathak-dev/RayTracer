@@ -30,10 +30,11 @@ RenderData::Camera::Camera(const Config::Camera &config,
       viewportHeight *
       (static_cast<double>(dimensions.width) / dimensions.height);
 
-  const auto viewportU = viewportWidth * u, viewportV = -viewportHeight * v;
+  const auto viewportU = viewportWidth * u;
+  const auto viewportV = -viewportHeight * v;
 
-  pixelDeltaU = viewportU / dimensions.width;
-  pixelDeltaV = viewportV / dimensions.height;
+  pixelDeltaU = viewportU / static_cast<double>(dimensions.width);
+  pixelDeltaV = viewportV / static_cast<double>(dimensions.height);
 
   const auto viewportUpperLeft = config.lookFrom - config.focusDistance * w -
                                  (viewportU + viewportV) * 0.5;

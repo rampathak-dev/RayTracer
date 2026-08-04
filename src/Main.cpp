@@ -9,11 +9,10 @@
 #include <format>
 #include <iostream>
 #include <istream>
-#include <memory>
 #include <print>
-#include <span>
 #include <sstream>
 #include <string>
+#include <string_view>
 #include <type_traits>
 #include <utility>
 
@@ -110,22 +109,22 @@ std::expected<UserInput, std::string> QueryAndValidateUserInput() noexcept {
 }
 
 std::expected<void, std::string> RunApplication() noexcept {
-  auto input = QueryAndValidateUserInput();
+  const auto input = QueryAndValidateUserInput();
 
   if (!input)
-    return std::unexpected(std::move(input.error()));
+    return std::unexpected(input.error());
 
   auto data = SceneCatalog::Get()[input->sceneNumber - 1].create();
 
   if (!data) [[unlikely]]
-    return std::unexpected(std::move(data.error()));
+    return std::unexpected(data.error());
 
   auto job = RenderJob{std::move(data.value()), input->renderConfig};
 
-  auto rayTracer = RayTracer::Create(input->renderMode, std::move(job));
+  const auto rayTracer = RayTracer::Create(input->renderMode, std::move(job));
 
   if (!rayTracer) [[unlikely]]
-    return std::unexpected(std::move(rayTracer.error()));
+    return std::unexpected(rayTracer.error());
 
   const auto start = std::chrono::high_resolution_clock::now();
 
@@ -139,11 +138,12 @@ std::expected<void, std::string> RunApplication() noexcept {
   if (!image) [[unlikely]]
     return std::unexpected(image.error());
 
-  auto result = ImageExport::PPMAscii("image", image->dimensions.width,
-                                      image->dimensions.height, image->pixels);
+  const auto result =
+      ImageExport::PPMAscii("image", image->dimensions.width,
+                            image->dimensions.height, image->pixels);
 
   if (!result) [[unlikely]]
-    return std::unexpected(std::move(result.error()));
+    return std::unexpected(result.error());
 
   return std::expected<void, std::string>{};
 }

@@ -81,18 +81,24 @@ TARGET_INCLUDE_DIRECTORIES(
     "${WGPU_DIR}/include" "${EXTERNAL_DIR}")
 
 IF(WIN32)
-    SET(WINDOWS_WGPU_PATH "${WGPU_DIR}/windows/x86_64")
+    SET(WGPU_PLATFORM_DIR "${WGPU_DIR}/windows/x86_64")
 
     IF(MSVC)
+        SET(WGPU_DEBUG_NAME "wgpu_native_windows_x86_64_msvc_debug.lib")
+        SET(WGPU_RELEASE_NAME "wgpu_native_windows_x86_64_msvc_release.lib")
+
         SET(WGPU_LIB_DEBUG
-            "${WINDOWS_WGPU_PATH}/msvc-debug/wgpu_native.lib")
+            "${WGPU_PLATFORM_DIR}/msvc_debug/${WGPU_DEBUG_NAME}")
         SET(WGPU_LIB_RELEASE
-            "${WINDOWS_WGPU_PATH}/msvc-release/wgpu_native.lib")
+            "${WGPU_PLATFORM_DIR}/msvc_release/${WGPU_RELEASE_NAME}")
     ELSE()
+        SET(WGPU_DEBUG_NAME "libwgpu_native_windows_x86_64_gnu_debug.a")
+        SET(WGPU_RELEASE_NAME "libwgpu_native_windows_x86_64_gnu_release.a")
+
         SET(WGPU_LIB_DEBUG
-            "${WINDOWS_WGPU_PATH}/gnu-debug/libwgpu_native.a")
+            "${WGPU_PLATFORM_DIR}/gnu_debug/${WGPU_DEBUG_NAME}")
         SET(WGPU_LIB_RELEASE
-            "${WINDOWS_WGPU_PATH}/gnu-release/libwgpu_native.a")
+            "${WGPU_PLATFORM_DIR}/gnu_release/${WGPU_RELEASE_NAME}")
     ENDIF()
 
     TARGET_LINK_LIBRARIES(
@@ -106,13 +112,17 @@ IF(WIN32)
         d3d12)
 ELSEIF(APPLE)
     IF(ARCHITECTURE MATCHES "^(x86_64|amd64)$")
-        SET(APPLE_WGPU_PATH "${WGPU_DIR}/apple/x86_64")
+        SET(WGPU_PLATFORM_DIR "${WGPU_DIR}/macos/x86_64")
+        SET(WGPU_DEBUG_NAME "libwgpu_native_macos_x86_64_debug.a")
+        SET(WGPU_RELEASE_NAME "libwgpu_native_macos_x86_64_release.a")
     ELSE()
-        SET(APPLE_WGPU_PATH "${WGPU_DIR}/apple/aarch64")
+        SET(WGPU_PLATFORM_DIR "${WGPU_DIR}/macos/aarch64")
+        SET(WGPU_DEBUG_NAME "libwgpu_native_macos_aarch64_debug.a")
+        SET(WGPU_RELEASE_NAME "libwgpu_native_macos_aarch64_release.a")
     ENDIF()
 
-    SET(WGPU_LIB_DEBUG "${APPLE_WGPU_PATH}/debug/libwgpu_native.a")
-    SET(WGPU_LIB_RELEASE "${APPLE_WGPU_PATH}/release/libwgpu_native.a")
+    SET(WGPU_LIB_DEBUG "${WGPU_PLATFORM_DIR}/debug/${WGPU_DEBUG_NAME}")
+    SET(WGPU_LIB_RELEASE "${WGPU_PLATFORM_DIR}/release/${WGPU_RELEASE_NAME}")
 
     TARGET_LINK_LIBRARIES(
         ${PROJECT_NAME} PRIVATE
@@ -126,13 +136,17 @@ ELSEIF(APPLE)
         "-framework Foundation")
 ELSE()
     IF(ARCHITECTURE MATCHES "^(x86_64|amd64)$")
-        SET(LINUX_WGPU_PATH "${WGPU_DIR}/linux/x86_64")
+        SET(WGPU_PLATFORM_DIR "${WGPU_DIR}/linux/x86_64")
+        SET(WGPU_DEBUG_NAME "libwgpu_native_linux_x86_64_debug.a")
+        SET(WGPU_RELEASE_NAME "libwgpu_native_linux_x86_64_release.a")
     ELSE()
-        SET(LINUX_WGPU_PATH "${WGPU_DIR}/linux/aarch64")
+        SET(WGPU_PLATFORM_DIR "${WGPU_DIR}/linux/aarch64")
+        SET(WGPU_DEBUG_NAME "libwgpu_native_linux_aarch64_debug.a")
+        SET(WGPU_RELEASE_NAME "libwgpu_native_linux_aarch64_release.a")
     ENDIF()
 
-    SET(WGPU_LIB_DEBUG "${LINUX_WGPU_PATH}/debug/libwgpu_native.a")
-    SET(WGPU_LIB_RELEASE "${LINUX_WGPU_PATH}/release/libwgpu_native.a")
+    SET(WGPU_LIB_DEBUG "${WGPU_PLATFORM_DIR}/debug/${WGPU_DEBUG_NAME}")
+    SET(WGPU_LIB_RELEASE "${WGPU_PLATFORM_DIR}/release/${WGPU_RELEASE_NAME}")
 
     TARGET_LINK_LIBRARIES(
         ${PROJECT_NAME} PRIVATE

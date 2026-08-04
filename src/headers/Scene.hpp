@@ -6,6 +6,7 @@
 #include <expected>
 #include <span>
 #include <string>
+#include <string_view>
 
 namespace Scene {
 struct Environment {
@@ -22,7 +23,7 @@ struct Data {
 
 namespace SceneCatalog {
 struct SceneEntry {
-  std::string name = "Hello, World!";
+  std::string_view name = "Hello, World!";
   std::expected<Scene::Data, std::string> (*create)();
 };
 

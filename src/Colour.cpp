@@ -1,6 +1,7 @@
 #include "headers/Colour.hpp"
 #include "headers/Vector3.hpp"
 #include <algorithm>
+#include <cmath>
 
 namespace {
 [[nodiscard]] double LinearToGammaCorrected(const double value) noexcept {

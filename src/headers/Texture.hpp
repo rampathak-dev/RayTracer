@@ -114,7 +114,7 @@ public:
   Colour Value(double u, double v, const Point3 &p) const noexcept override;
   void Accept(TextureVisitor &) const noexcept override;
 
-  [[nodiscard]] const Perlin &Perlin() const noexcept;
+  [[nodiscard]] const Perlin &GetPerlin() const noexcept;
   [[nodiscard]] double Scale() const noexcept;
   [[nodiscard]] double Distortion() const noexcept;
   [[nodiscard]] std::size_t TurbulenceDepth() const noexcept;

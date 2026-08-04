@@ -7,10 +7,12 @@
 #include "headers/Random.hpp"
 #include "headers/Texture.hpp"
 #include "headers/Vector3.hpp"
+#include <algorithm>
 #include <array>
 #include <expected>
 #include <memory>
 #include <span>
+#include <string>
 #include <utility>
 
 namespace {

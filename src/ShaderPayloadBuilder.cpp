@@ -6,6 +6,7 @@
 #include "headers/Texture.hpp"
 #include "headers/Vector3.hpp"
 #include <algorithm>
+#include <cmath>
 #include <cstddef>
 #include <cstdint>
 #include <unordered_map>
@@ -146,7 +147,7 @@ void ShaderPayloadBuilder::Visit(const ImageTexture &imageTexture) noexcept {
 }
 
 void ShaderPayloadBuilder::Visit(const NoiseTexture &noiseTexture) noexcept {
-  const auto &perlin = noiseTexture.Perlin();
+  const auto &perlin = noiseTexture.GetPerlin();
 
   const auto perlinOffset =
       static_cast<std::uint32_t>(mPayload.perlinNoiseValues.size());

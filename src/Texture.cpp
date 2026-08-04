@@ -4,6 +4,7 @@
 #include "headers/RTWImage.hpp"
 #include "headers/TextureVisitor.hpp"
 #include "headers/Vector3.hpp"
+#include <algorithm>
 #include <cmath>
 #include <cstddef>
 #include <expected>
@@ -109,7 +110,7 @@ void NoiseTexture::Accept(TextureVisitor &visitor) const noexcept {
   visitor.Visit(*this);
 }
 
-const Perlin &NoiseTexture::Perlin() const noexcept { return mPerlin; }
+const Perlin &NoiseTexture::GetPerlin() const noexcept { return mPerlin; }
 
 double NoiseTexture::Scale() const noexcept { return mScale; }
 
