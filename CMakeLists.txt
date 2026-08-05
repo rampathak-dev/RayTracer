@@ -100,7 +100,7 @@ IF(WIN32)
         SET(WGPU_LIB_RELEASE
             "${WGPU_PLATFORM_DIR}/gnu_release/${WGPU_RELEASE_NAME}")
     ENDIF()
-    
+
     TARGET_LINK_LIBRARIES(
         ${PROJECT_NAME} PRIVATE
         $<$<CONFIG:Debug>:${WGPU_LIB_DEBUG}>
@@ -113,9 +113,8 @@ IF(WIN32)
         ws2_32
         userenv
         ntdll
-        bcrypt)
-
-    TARGET_LINK_LIBRARIES(${PROJECT_NAME} PRIVATE stdc++exp)
+        bcrypt
+        $<$CXX_COMPILER_ID:GNU>:stdc++exp>)
 ELSEIF(APPLE)
     IF(ARCHITECTURE MATCHES "^(x86_64|amd64)$")
         SET(WGPU_PLATFORM_DIR "${WGPU_DIR}/macos/x86_64")
