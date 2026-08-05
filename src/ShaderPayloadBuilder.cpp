@@ -13,6 +13,8 @@
 #include <utility>
 #include <vector>
 
+ShaderPayloadBuilder::~ShaderPayloadBuilder() = default;
+
 std::size_t
 ShaderPayloadBuilder::BuildBVHNodes(std::span<BVHEntry> entries) noexcept {
   const auto n = entries.size();

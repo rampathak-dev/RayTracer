@@ -44,7 +44,15 @@ private:
 
 public:
   ShaderPayloadBuilder() = delete;
-  ~ShaderPayloadBuilder() override = default;
+
+  // no ~ShaderPayloadBuilder() = default here (just the declaration).
+  // because of multiple inheritance, the compiler generates some glue code to
+  // run destructors in correct order, this happens in each translation unit, so
+  // with LTO enabled the linker sees multiple copies of that same code and
+  // throws an error. ShaderPayloadBuilder::~ShaderPayloadBuilder() = default is
+  // hence written in ShaderPayloadBuilder.cpp
+  ~ShaderPayloadBuilder() override;
+
   ShaderPayloadBuilder(const ShaderPayloadBuilder &) = delete;
   ShaderPayloadBuilder &operator=(const ShaderPayloadBuilder &) = delete;
   ShaderPayloadBuilder(ShaderPayloadBuilder &&) noexcept = default;
