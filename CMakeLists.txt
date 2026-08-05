@@ -109,7 +109,11 @@ IF(WIN32)
     TARGET_LINK_LIBRARIES(
         ${PROJECT_NAME} PRIVATE
         dxgi
-        d3d12)
+        d3d12
+        ws2_32
+        userenv
+        ntdll
+        bcrypt)
 ELSEIF(APPLE)
     IF(ARCHITECTURE MATCHES "^(x86_64|amd64)$")
         SET(WGPU_PLATFORM_DIR "${WGPU_DIR}/macos/x86_64")

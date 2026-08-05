@@ -52,6 +52,7 @@ Both vendored under `src/external` — no separate download needed.
 
 - C++23-compatible compiler (MSVC, Clang, GCC, or AppleClang)
 - CMake >= 3.30
+- CMake compatible build system
 - Linux only: Vulkan SDK / dev packages installed
 
 ```bash
@@ -59,7 +60,7 @@ git clone https://github.com/rampathak-dev/RayTracer.git
 cd RayTracer
 
 cmake -S . -B build
-cmake --build build
+cmake --build build --config Release
 
 # Run the executable from the build directory
 ```

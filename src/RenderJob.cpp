@@ -3,6 +3,7 @@
 #include "headers/Hittable.hpp"
 #include "headers/Scene.hpp"
 #include "headers/Vector3.hpp"
+#include <cmath>
 #include <cstddef>
 #include <utility>
 
