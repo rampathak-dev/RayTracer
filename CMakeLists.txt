@@ -114,7 +114,7 @@ IF(WIN32)
         userenv
         ntdll
         bcrypt
-        $<$CXX_COMPILER_ID:GNU>:stdc++exp>)
+        $<$<CXX_COMPILER_ID:GNU>:stdc++exp>)
 ELSEIF(APPLE)
     IF(ARCHITECTURE MATCHES "^(x86_64|amd64)$")
         SET(WGPU_PLATFORM_DIR "${WGPU_DIR}/macos/x86_64")
